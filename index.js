@@ -48,7 +48,7 @@ const AddData = async(req,res)=>{
 }
 
 const AddData_Query = async(req,res)=>{
-    let dustDensity_C2 = req.params.dust
+    let dustDensity_C2 = req.query.dust
     var dustDensity = Number(dustDensity_C2)
 
     try {
