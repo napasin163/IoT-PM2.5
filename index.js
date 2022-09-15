@@ -39,8 +39,6 @@ const AddData = async(req,res)=>{
     let {dustDensity} = req.body
 
     try {
-        // console.log(typeof Temperature_C)
-        // console.log(typeof Humadity)
         const data = new ValuesModel(req.body)
         await data.save()
         res.json({Message:"Data Added Success",data})
@@ -48,13 +46,35 @@ const AddData = async(req,res)=>{
 }
 
 const AddData_Query = async(req,res)=>{
-    let dustDensity_C2 = req.query.dust
-    var dustDensity = Number(dustDensity_C2)
+    let dustDensity_C = req.query.dust
+    var dustDensity = Number(dustDensity_C)
+
+    let boardID_C = req.query.boardIDTest
+    var boardID = Number(boardID_C)
+
+    let day_C = req.query.dayTest
+    var day = Number(day_C)
+
+    let date_C = req.query.dateTest
+    var date = Number(date_C)
+
+    let month_C = req.query.monthTest
+    var month = Number(month_C)
+
+    let year_C = req.query.yearTest
+    var year = Number(year_C)
+    
+    let seconds_C = req.query.secondsTest
+    var seconds = Number(seconds_C)
+
+    let minutes_C = req.query.minutesTest
+    var minutes = Number(minutes_C)
+
+    let hours_C = req.query.hoursTest
+    var hours = Number(hours_C)
 
     try {
-        // console.log(typeof Temperature_C)
-        // console.log(typeof Humadity)
-        const data = new ValuesModel({dustDensity})
+        const data = new ValuesModel({dustDensity, boardID, day, date, month, year, seconds, minutes, hours})
         await data.save()
         res.json({Message:"Temp Added Success",data})
     }catch (error) {res.json({Message:"Error",error})}
@@ -70,12 +90,14 @@ const DeleteData = async(req,res)=>{
 
 const UpdateData = async(req,res)=>{
     let _id = req.params.id
-    let {dustDensity} = req.body
+    let {dustDensity, createdAt , boardID, day, date, month, year, seconds, minutes, hours} = req.body
     try {
-        const data = await ValuesModel.findByIdAndUpdate(_id,{dustDensity})
+        const data = await ValuesModel.findByIdAndUpdate(_id,{dustDensity, createdAt ,boardID, day, date, month, year, seconds, minutes, hours})
         res.json({Message:"Data Updated Success",data})
     }catch (error) {res.json({Message:"Error",error})}
 }
+
+
 
 //......................... APIs ........................
 app.post("/",AddData)  // Adding data through post metheod & body
