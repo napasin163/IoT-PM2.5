@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const ValuesSchema = new mongoose.Schema({
     dustDensity : {},
     day : {},
-    date : {},
     month : {},
     year : {},
     seconds : {},

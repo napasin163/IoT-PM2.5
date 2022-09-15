@@ -55,9 +55,6 @@ const AddData_Query = async(req,res)=>{
     let day_C = req.query.daytest
     var day = Number(day_C)
 
-    let date_C = req.query.datetest
-    var date = Number(date_C)
-
     let month_C = req.query.monthtest
     var month = Number(month_C)
 
@@ -77,13 +74,12 @@ const AddData_Query = async(req,res)=>{
         /*console.log(boardID_C)
         console.log(dustDensity_C)
         console.log(day_C)
-        console.log(date_C)
         console.log(month_C)
         console.log(year_C)
         console.log(seconds_C)
         console.log(minutes_C)
         console.log(hours_C)*/
-        const data = new ValuesModel({dustDensity, boardID, day, date, month, year, seconds, minutes, hours})
+        const data = new ValuesModel({dustDensity, boardID, day, month, year, seconds, minutes, hours})
         await data.save()
         res.json({Message:"Data Added Success",data})
     }catch (error) {res.json({Message:"Error",error})}
@@ -99,9 +95,9 @@ const DeleteData = async(req,res)=>{
 
 const UpdateData = async(req,res)=>{
     let _id = req.params.id
-    let {dustDensity, createdAt , boardID, day, date, month, year, seconds, minutes, hours} = req.body
+    let {dustDensity, createdAt , boardID, day, month, year, seconds, minutes, hours} = req.body
     try {
-        const data = await ValuesModel.findByIdAndUpdate(_id,{dustDensity, createdAt ,boardID, day, date, month, year, seconds, minutes, hours})
+        const data = await ValuesModel.findByIdAndUpdate(_id,{dustDensity, createdAt ,boardID, day, month, year, seconds, minutes, hours})
         res.json({Message:"Data Updated Success",data})
     }catch (error) {res.json({Message:"Error",error})}
 }
