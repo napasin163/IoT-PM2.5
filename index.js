@@ -49,34 +49,43 @@ const AddData_Query = async(req,res)=>{
     let dustDensity_C = req.query.dust
     var dustDensity = Number(dustDensity_C)
 
-    let boardID_C = req.query.boardIDTest
+    let boardID_C = req.query.boardidtest
     var boardID = Number(boardID_C)
 
-    let day_C = req.query.dayTest
+    let day_C = req.query.daytest
     var day = Number(day_C)
 
-    let date_C = req.query.dateTest
+    let date_C = req.query.datetest
     var date = Number(date_C)
 
-    let month_C = req.query.monthTest
+    let month_C = req.query.monthtest
     var month = Number(month_C)
 
-    let year_C = req.query.yearTest
+    let year_C = req.query.yeartest
     var year = Number(year_C)
     
-    let seconds_C = req.query.secondsTest
+    let seconds_C = req.query.secondstest
     var seconds = Number(seconds_C)
 
-    let minutes_C = req.query.minutesTest
+    let minutes_C = req.query.minutestest
     var minutes = Number(minutes_C)
 
-    let hours_C = req.query.hoursTest
+    let hours_C = req.query.hourstest
     var hours = Number(hours_C)
 
     try {
+        /*console.log(boardID_C)
+        console.log(dustDensity_C)
+        console.log(day_C)
+        console.log(date_C)
+        console.log(month_C)
+        console.log(year_C)
+        console.log(seconds_C)
+        console.log(minutes_C)
+        console.log(hours_C)*/
         const data = new ValuesModel({dustDensity, boardID, day, date, month, year, seconds, minutes, hours})
         await data.save()
-        res.json({Message:"Temp Added Success",data})
+        res.json({Message:"Data Added Success",data})
     }catch (error) {res.json({Message:"Error",error})}
 }
 

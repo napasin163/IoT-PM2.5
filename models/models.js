@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const ValuesSchema = new mongoose.Schema({
-    boardID : {},
     dustDensity : {},
     day : {},
     date : {},
@@ -9,6 +8,7 @@ const ValuesSchema = new mongoose.Schema({
     seconds : {},
     minutes : {},
     hours : {},
+    boardID : {},
 },
 {
     timestamps:true
