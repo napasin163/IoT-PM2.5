@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express');
 const mongoose = require('mongoose');
 const ValuesModel = require('./models/models');
@@ -26,6 +27,40 @@ const GetData = async(req,res)=>{
         res.json(data)
     }catch (error) { res.json({Message:"Error",error})}
 }
+
+
+const aunbangwoun = async(req,res)=>{
+    
+    try {
+        let day = req.params.day
+        let month = req.params.month
+        let year = req.params.year
+        const data =  await ValuesModel.find()
+        var caltext = [];
+        for (let i = 0; i < data.length; i++) 
+        {
+            if (data[i].day == day && data[i].month == month && data[i].year == year)
+            {
+                caltext.push(data[i])
+            }
+        }        
+        // res.json({Message:"All Data",data})
+        res.json({Message:"Data Found",caltext})
+    }
+    catch (error) { res.json({Message:"Error",error})}
+}
+
+const aunbangboard = async (req,res)=>{
+    
+    try {
+        let board = req.params.boardID
+        const data = await ValuesModel.findOne(board)
+        
+        res.json(data)
+    }
+    catch (error) { res.json({Message:"Error",error})}
+}
+
 
 const FindData = async(req,res)=>{
     let _id = req.params.id
@@ -107,6 +142,10 @@ const UpdateData = async(req,res)=>{
 //......................... APIs ........................
 app.post("/",AddData)  // Adding data through post metheod & body
 app.get("/",GetData)
+
+app.get("/readwan/:day/:month/:year",aunbangwoun)
+app.get("/readboard/:board",aunbangboard)
+
 app.get("/find/:id",FindData)
 app.get("/add",AddData_Query) // Adding data through get method & query
 app.delete("/delete/:id",DeleteData)
