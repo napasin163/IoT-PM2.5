@@ -50,13 +50,21 @@ const aunbangwoun = async(req,res)=>{
     catch (error) { res.json({Message:"Error",error})}
 }
 
-const aunbangboard = async (req,res)=>{
+const aunbangboard = async(req,res)=>{
     
     try {
-        let board = req.params.boardID
-        const data = await ValuesModel.findOne(board)
-        
-        res.json(data)
+        let board = req.params.board
+        const data =  await ValuesModel.find()
+        var caltext = [];
+        for (let i = 0; i < data.length; i++) 
+        {
+            if (data[i].boardID == board)
+            {
+                caltext.push(data[i])
+            }
+        }        
+        // res.json({Message:"All Data",data})
+        res.json({Message:"Data Found",caltext})
     }
     catch (error) { res.json({Message:"Error",error})}
 }
@@ -142,10 +150,8 @@ const UpdateData = async(req,res)=>{
 //......................... APIs ........................
 app.post("/",AddData)  // Adding data through post metheod & body
 app.get("/",GetData)
-
 app.get("/readwan/:day/:month/:year",aunbangwoun)
 app.get("/readboard/:board",aunbangboard)
-
 app.get("/find/:id",FindData)
 app.get("/add",AddData_Query) // Adding data through get method & query
 app.delete("/delete/:id",DeleteData)

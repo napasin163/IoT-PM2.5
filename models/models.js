@@ -29,9 +29,8 @@ const ValuesSchema = new mongoose.Schema({
         required : true
     },
     boardID : {
-        type : String,
-        defaultValue : "001"
-    },
+        type : {}
+    }
 },
 {
     timestamps:true
